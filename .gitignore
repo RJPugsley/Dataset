@@ -1,0 +1,33 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+.Icon?
+._*
+.apdisk
+.fseventsd
+.TemporaryItems
+.DocumentRevisions-V100
+.AppleDesktop
+.Network Trash Folder
+
+# Python environments
+test_env/
+venv/
+.venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# Editors / IDE settings
+.vscode/
+.idea/
+
