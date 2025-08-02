@@ -1,0 +1,358 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 GENRE TAXONOMY RULES \'97 v3 (MASTER)\
+\
+GOAL\
+- For every input label, assign exactly TWO tags:\
+  1) PRIMARY GENRE = umbrella based on musical structure (rhythm engine, form, instrumentation, harmonic/melodic system).\
+  2) SECONDARY GENRE = structural/stylistic subtype (NOT market/scene/language).\
+- Keep labels canonical, ML\uc0\u8209 friendly, and scalable.\
+\
+---------------------------------------------\
+A) OUTPUT CONTRACT (chat batches)\
+---------------------------------------------\
+- During a PRIMARY phase (e.g., Pop), assistant replies with:\
+  \'95 ONLY a flat JSON object mapping \{"Original Tag": "Secondary Genre", ...\}\
+  \'95 No top-level key, no prose, no comments.\
+- You paste that block under the correct PRIMARY object in your master JSON.\
+\
+---------------------------------------------\
+B) CANONICALS & VARIANTS\
+---------------------------------------------\
+- Keep ONE canonical key per genre under each PRIMARY (e.g., "Britpop", "UK Drill").\
+- Do NOT keep spacing/case/hyphen variants as separate keys.\
+- Secondary values must also be canonical (e.g., "Synth-Pop", not "synth pop").\
+- Optional (for later coding): maintain a separate Alias list; not required while we\'92re only curating JSON.\
+\
+---------------------------------------------\
+C) CURRENT PRIMARY SET\
+---------------------------------------------\
+Core primaries we are using now:\
+- Pop\
+- Dance\
+- Drill\
+- Downtempo\
+- Rock\
+- Hip Hop          (placeholder to be filled later)\
+- R&B              (placeholder to be filled later)\
+- Afro/Global\
+- Folk/Traditional\
+- Hard Dance       (new; for hard, fast 4/4 rave-lineage club styles)\
+- Rave             (optional; for 90s underground rave/breakbeat families)\
+- Ignore           (non-genres/metadata: exclude from model labels)\
+\
+---------------------------------------------\
+D) PRIMARY ASSIGNMENT \'97 DECISION TREE\
+---------------------------------------------\
+1) Strong structural identity present?\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = that structural family.\
+   (Examples: Jersey Club 
+\f1 \uc0\u8594 
+\f0  Dance; Hardcore Techno 
+\f1 \uc0\u8594 
+\f0  Hard Dance; Trip Hop 
+\f1 \uc0\u8594 
+\f0  Downtempo; Britpop 
+\f1 \uc0\u8594 
+\f0  Rock.)\
+\
+2) Club/electronic rhythm engine or DJ-centric form (4/4 grids, drops, breakdowns)?\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Dance.\
+   (Eurodance, Italo Disco, Jersey Club, House/Techno families, etc.)\
+\
+3) Hard, fast, rave-lineage 4/4 styles (distorted/gated kicks, 150\'96200+ BPM; bounce/donk/scouse):\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Hard Dance.\
+   (Hardcore Techno, Hardstyle, Happy Hardcore, Hard House, Scouse House/Donk, Bounce, Gabber, Makina\'85)\
+\
+4) Slow, loop-centric/chill breakbeat or ambience as the main engine:\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Downtempo.\
+   (Trip Hop now; later Lo\uc0\u8209 Fi, Chillhop, Downtempo Ambient, etc.)\
+\
+5) Band/guitar\uc0\u8209 driven song forms:\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Rock.\
+   (Britpop, Indie Rock, Post-Rock, Pop Rock.)\
+\
+6) Rap/MC\uc0\u8209 led with hip-hop drum grammar (boom\u8209 bap, trap hats/808s, bar\u8209 centric structure):\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Hip Hop.  (to be populated later)\
+\
+7) R&B/sung groove traditions (soul lineage, contemporary R&B, alt\uc0\u8209 R&B):\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = R&B.      (to be populated later)\
+\
+8) African/Global structural families not just \'93Pop from X\'94:\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Afro/Global. (e.g., Afropop under Afro/Global.)\
+\
+9) Pop wording and no stronger structural pull:\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Pop.\
+\
+10) Folk\uc0\u8209 rooted traditional systems (regional scales/instruments/story form):\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Folk/Traditional. (e.g., Luk Thung 
+\f1 \uc0\u8594 
+\f0  Thai Folk/Traditional)\
+\
+11) If the term is a market/scene/status (non-genre):\
+   
+\f1 \uc0\u8594 
+\f0  PRIMARY = Ignore. (e.g., Talent Show, Meme)\
+\
+---------------------------------------------\
+E) SECONDARY ASSIGNMENT \'97 RULES\
+---------------------------------------------\
+- Secondary must describe structure/stylistic subtype:\
+  \'95 Pop 
+\f1 \uc0\u8594 
+\f0  Contemporary Pop (qualifier), Asian Pop, South Asian Pop, Middle Eastern Pop, Latin Pop\
+  \'95 Dance 
+\f1 \uc0\u8594 
+\f0  Eurodance, Italo Disco, Jersey Club, Tech House, etc.\
+  \'95 Hard Dance 
+\f1 \uc0\u8594 
+\f0  Hardcore Techno, Hardstyle, Happy Hardcore, Scouse House, Bounce, Gabber, Makina\
+  \'95 Downtempo 
+\f1 \uc0\u8594 
+\f0  Trip Hop\
+  \'95 Rock 
+\f1 \uc0\u8594 
+\f0  Britpop, Indie Rock, Pop Rock\'85\
+  \'95 Drill 
+\f1 \uc0\u8594 
+\f0  UK Drill, Chicago Drill, Brooklyn Drill\'85\
+  \'95 Afro/Global 
+\f1 \uc0\u8594 
+\f0  Afropop (etc.)\
+  \'95 Folk/Traditional 
+\f1 \uc0\u8594 
+\f0  region/style labels (e.g., Thai Folk/Traditional)\
+\
+- If two strong structures exist, choose the dominant rhythm/form as PRIMARY; encode the other as a fusion only if helpful (e.g., \'93Pop Fusion\'94, \'93Hip Hop Fusion\'94).\
+\
+---------------------------------------------\
+F) POP \'97 LOCKED SECONDARY BUCKETS\
+---------------------------------------------\
+When PRIMARY = Pop, SECONDARY must be one of:\
+1) Asian Pop\
+   - East & SE Asia: K\uc0\u8209 /J\u8209 /C\u8209 /V\u8209 /T\u8209 /P\u8209 Pop, Indonesian/Malaysian Pop, Kay\u333 kyoku, City Pop roots, Vocaloid, etc.\
+\
+2) South Asian Pop\
+   - Indian Subcontinent: Hindi/Tamil/Telugu/Kannada/Malayalam/Bangla/Pakistani/Sri Lankan/Nepali\
+\
+3) Middle Eastern Pop\
+   - Turkish, Arabic (Levant/Gulf/Maghreb), Persian/Iranian, Israeli; e.g., Arabesk 
+\f1 \uc0\u8594 
+\f0  Middle Eastern Pop\
+\
+4) Latin Pop\
+   - Spanish/Portuguese-language pop; Latin rhythmic foundations (non\uc0\u8209 primary reggaeton)\
+\
+5) Contemporary Pop (Qualifier)\
+   - Western/global Top\uc0\u8209 40 styles; add a qualifier in parentheses:\
+     \'93Indie Pop\'94, \'93Alternative Pop\'94, \'93Dance-Pop\'94, \'93Synth-Pop\'94, \'93Bedroom Pop\'94, \'93Power Pop\'94,\
+     \'93Chamber Pop\'94, \'93Art Pop\'94, \'93Dream Pop\'94, \'93Baroque Pop\'94, \'93Teen Pop\'94, \'93Europop\'94, \'93Schlager\'94,\
+     \'93Chanson/Vari\'e9t\'e9\'94, \'93Country Pop\'94, \'93Trap Pop\'94, \'93Worship Pop\'94, etc.\
+\
+Special Pop placements we\'92ve agreed:\
+- Jersey Club 
+\f1 \uc0\u8594 
+\f0  NOT Pop. Dance / Jersey Club.\
+- Chinese Indie 
+\f1 \uc0\u8594 
+\f0  NOT Pop. Rock / Indie Rock.\
+- Trip Hop 
+\f1 \uc0\u8594 
+\f0  NOT Pop. Downtempo / Trip Hop.\
+- Disco Polo 
+\f1 \uc0\u8594 
+\f0  NOT Pop. Dance / Disco Polo.\
+- Italo Disco 
+\f1 \uc0\u8594 
+\f0  NOT Pop. Dance / Italo Disco.\
+- Swedish Trap Pop 
+\f1 \uc0\u8594 
+\f0  Pop / Contemporary Pop (Trap Pop).\
+- Ukrainian Pop 
+\f1 \uc0\u8594 
+\f0  Pop / Contemporary Pop.\
+- Kay\uc0\u333 kyoku, City Pop, Vocaloid 
+\f1 \uc0\u8594 
+\f0  Pop / Asian Pop.\
+- Mizrahi, Mahraganat 
+\f1 \uc0\u8594 
+\f0  Pop / Middle Eastern Pop (if modern\uc0\u8209 pop formatted; otherwise consider Folk/Traditional where appropriate).\
+\
+---------------------------------------------\
+G) DRILL \'97 PRIMARY SPECIFICS\
+---------------------------------------------\
+Primary: Drill\
+Secondaries: UK Drill, Chicago Drill, Brooklyn Drill, Irish Drill, Australian Drill, etc.\
+Guiding traits: sliding 808s, syncopated snares/rims, triplet hats, dark/minor palette, ~138\'96145 BPM (UK) vs 60\'9675/120\'96150 (US double\uc0\u8209 time clusters).\
+\
+---------------------------------------------\
+H) HARD DANCE \'97 PRIMARY SPECIFICS (NEW)\
+---------------------------------------------\
+Primary: Hard Dance\
+Typical secondaries: Hardcore Techno, Hardstyle, Happy Hardcore, Gabber, Hard House, Scouse House (Donk), Bounce, Makina.\
+Guiding traits: hard 4/4, 150\'96200+ BPM, distorted/gated kicks, rave lineage.\
+\
+---------------------------------------------\
+I) RAVE \'97 OPTIONAL PRIMARY\
+---------------------------------------------\
+Primary: Rave (optional if you want to separate 90s underground)\
+Secondaries: Breakbeat Hardcore, Oldskool Rave, Acid Rave, Rave Techno (historic, warehouse/breakbeat emphasis).\
+\
+---------------------------------------------\
+J) FOLK/TRADITIONAL \'97 PRIMARY SPECIFICS\
+---------------------------------------------\
+Use for genres whose core is regional folk systems (scales, instruments, narrative forms).\
+Example agreed: Luk Thung 
+\f1 \uc0\u8594 
+\f0  Folk/Traditional / Thai Folk/Traditional.\
+\
+---------------------------------------------\
+K) IGNORE \'97 NON-GENRES/METADATA\
+---------------------------------------------\
+Keep scene/market/status labels here so they\'92re excluded from training labels:\
+- Talent Show 
+\f1 \uc0\u8594 
+\f0  Non-Genre (Metadata)\
+- Meme 
+\f1 \uc0\u8594 
+\f0  Non-Genre (Metadata)\
+(You can add: Eurovision, Viral Hit, Playlist Curated, TikTok, Idol Winner, etc.)\
+\
+---------------------------------------------\
+L) SPECIAL CASE \'97 REGGAETON (future primary)\
+---------------------------------------------\
+- If dembow is the core engine and urban/reggaeton structure dominates:\
+  
+\f1 \uc0\u8594 
+\f0  PRIMARY = Reggaeton; SECONDARY = Pop Fusion (if applicable).\
+- If it\'92s a Pop song with light dembow flavour only:\
+  
+\f1 \uc0\u8594 
+\f0  PRIMARY = Pop; SECONDARY = Latin Pop (Reggaeton influence).\
+\
+---------------------------------------------\
+M) NAMING & FORMAT\
+---------------------------------------------\
+- Title Case for keys/values; qualifiers in parentheses: "Contemporary Pop (Synth-Pop)".\
+- No trailing commas; valid JSON only.\
+- No "(review)" or notes inside values unless explicitly requested.\
+- Keep duplicates out (e.g., "Brit Pop" 
+\f1 \uc0\u8594 
+\f0  remove; keep canonical "Britpop").\
+\
+---------------------------------------------\
+N) WORKFLOW FOR NEW BATCHES\
+---------------------------------------------\
+1) Confirm the PRIMARY phase (e.g., "Pop").\
+2) You post ~10\'9615 labels.\
+3) Assistant replies with JSON mapping (no top-level) for that PRIMARY.\
+4) If a label belongs under a different PRIMARY, assistant will say so and can supply a separate paste\uc0\u8209 block for that PRIMARY if you approve.\
+5) Periodically, we can produce an updated master JSON with all changes applied.\
+\
+---------------------------------------------\
+O) CONFIRMED EXAMPLES SNAPSHOT\
+---------------------------------------------\
+Pop:\
+- "K-Pop" 
+\f1 \uc0\u8594 
+\f0  Asian Pop\
+- "Hindi Pop" 
+\f1 \uc0\u8594 
+\f0  South Asian Pop\
+- "Turkish Pop" 
+\f1 \uc0\u8594 
+\f0  Middle Eastern Pop\
+- "Spanish Pop", "Colombian Pop" 
+\f1 \uc0\u8594 
+\f0  Latin Pop\
+- "Synthpop" 
+\f1 \uc0\u8594 
+\f0  Contemporary Pop (Synth-Pop)\
+- "French Pop" / "Vari\'e9t\'e9 Fran\'e7aise" 
+\f1 \uc0\u8594 
+\f0  Contemporary Pop (Chanson/Vari\'e9t\'e9)\
+- "Swedish Trap Pop" 
+\f1 \uc0\u8594 
+\f0  Contemporary Pop (Trap Pop)\
+- "Ukrainian Pop" 
+\f1 \uc0\u8594 
+\f0  Contemporary Pop\
+\
+Dance:\
+- "Eurodance" 
+\f1 \uc0\u8594 
+\f0  Eurodance\
+- "Italo Dance" 
+\f1 \uc0\u8594 
+\f0  Italo Dance\
+- "Jersey Club" 
+\f1 \uc0\u8594 
+\f0  Jersey Club\
+- "Disco Polo" 
+\f1 \uc0\u8594 
+\f0  Disco Polo\
+- "Italo Disco" 
+\f1 \uc0\u8594 
+\f0  Italo Disco\
+\
+Hard Dance:\
+- "Hardcore Techno" 
+\f1 \uc0\u8594 
+\f0  Hardcore Techno\
+\
+Downtempo:\
+- "Trip Hop" 
+\f1 \uc0\u8594 
+\f0  Trip Hop\
+\
+Rock:\
+- "Britpop" 
+\f1 \uc0\u8594 
+\f0  Britpop\
+- "Chinese Indie" 
+\f1 \uc0\u8594 
+\f0  Indie Rock\
+\
+Afro/Global:\
+- "Afropop" 
+\f1 \uc0\u8594 
+\f0  Afropop\
+\
+Folk/Traditional:\
+- "Luk Thung" 
+\f1 \uc0\u8594 
+\f0  Thai Folk/Traditional\
+\
+Ignore:\
+- "Talent Show" 
+\f1 \uc0\u8594 
+\f0  Non-Genre (Metadata)\
+- "Meme" 
+\f1 \uc0\u8594 
+\f0  Non-Genre (Metadata)\
+}
