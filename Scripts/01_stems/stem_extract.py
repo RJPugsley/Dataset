@@ -1,10 +1,9 @@
 from pathlib import Path
 from demucs.pretrained import get_model
 
-def extract_stems(input_path, output_root="/Volumes/Dataset", model_name="htdemucs_6s"):
+def extract_stems(input_path, output_root="/Users/djf2/Desktop/Dataset/Downbeat", model_name="htdemucs_6s"):
     """
     Extract stems from a single audio file or all files in a folder.
-    Prompts for file/folder if run as main script.
     """
     import os
     os.chdir(os.path.expanduser("~"))
@@ -101,10 +100,26 @@ def extract_stems(input_path, output_root="/Volumes/Dataset", model_name="htdemu
             stem_path = track_folder / f"{name}.wav"
             sf.write(stem_path, audio.cpu().T.numpy(), sr)
 
+        # Move to output folder, overwrite if exists
         original_copy_path = track_folder / file_path.name
-        if not original_copy_path.exists():
-            shutil.move(str(file_path), str(original_copy_path))
+        if original_copy_path.exists():
+            original_copy_path.unlink()
+        shutil.move(str(file_path), str(original_copy_path))
+        print(f"📁 Moved original to: {original_copy_path}")
 
+        # Copy to flat MP3 archive (overwrite)
+        mp3_folder = Path("/Users/djf2/Music/MP3")
+        mp3_folder.mkdir(parents=True, exist_ok=True)
+        mp3_copy_path = mp3_folder / file_path.name
+        if mp3_copy_path.exists():
+            mp3_copy_path.unlink()
+        try:
+            shutil.copy2(str(original_copy_path), str(mp3_copy_path))
+            print(f"🎧 Copied to MP3 archive (overwrite): {mp3_copy_path}")
+        except Exception as e:
+            print(f"⚠️ Failed to copy to MP3 archive: {e}")
+
+        # Save metadata
         json_path = track_folder / f"{track_name}.json"
         if not json_path.exists():
             track_data = {
@@ -148,8 +163,8 @@ def extract_stems(input_path, output_root="/Volumes/Dataset", model_name="htdemu
         raise ValueError(f"Invalid path: {input_path}")
 
 
-# Interactive run mode
+# CLI entry point
 if __name__ == "__main__":
     user_input = input("Enter the full path to a file or folder: ").strip()
-    output_dir = "/Volumes/Dataset"
+    output_dir = "/Users/djf2/Desktop/Dataset/Downbeat"
     extract_stems(user_input, output_dir)
